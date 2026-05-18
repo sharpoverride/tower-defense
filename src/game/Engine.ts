@@ -245,11 +245,14 @@ export class GameEngine {
         this.state.timeSinceLastSpawn = 0;
         const type = this.state.enemiesToSpawn.shift()!;
         const start = this.state.path[0];
+        const healthMultiplier = 1 + (this.state.wave * 0.4);
+        const maxHp = ENEMY_STATS[type].maxHp * healthMultiplier;
+        
         this.state.enemies.push({
           id: getId(),
           type,
-          hp: ENEMY_STATS[type].maxHp,
-          maxHp: ENEMY_STATS[type].maxHp,
+          hp: maxHp,
+          maxHp: maxHp,
           x: start.x,
           y: start.y,
           pathIndex: 0,
