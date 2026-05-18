@@ -156,20 +156,20 @@ export default function Game() {
 
         <div className="flex items-center gap-6">
           <div className="flex gap-4 items-center">
+            {(gameState.status === 'idle' || gameState.status === 'countdown') && (
+              <button 
+                onClick={startWave} 
+                className={`px-6 py-2 text-white font-bold rounded uppercase tracking-widest text-xs transition-transform hover:scale-105 active:scale-95 border ${gameState.status === 'countdown' ? 'bg-amber-600 hover:bg-amber-500 border-amber-400/50' : 'bg-indigo-600 hover:bg-indigo-500 border-indigo-400/50'}`}
+              >
+                {gameState.status === 'countdown' ? 'Skip Timer' : 'Start Wave'}
+              </button>
+            )}
             <button title="Play / Pause" onClick={() => setIsPaused(!isPaused)} className={`p-2 rounded border transition-colors ${isPaused ? 'bg-amber-600/20 border-amber-500 text-amber-500' : 'bg-slate-800 border-slate-700 hover:bg-slate-700'}`}>
               {isPaused ? <Play size={16} /> : <Pause size={16} />}
             </button>
             <button title="Fast Forward" onClick={() => setSpeed(speed === 1 ? 2 : 1)} className={`p-2 rounded border transition-colors ${speed === 2 ? 'bg-emerald-600/20 border-emerald-500 text-emerald-500' : 'bg-slate-800 border-slate-700 hover:bg-slate-700'}`}>
               <FastForward size={16} />
             </button>
-            {(gameState.status === 'idle' || gameState.status === 'countdown') && (
-              <button 
-                onClick={startWave} 
-                className={`ml-4 px-6 py-2 text-white font-bold rounded uppercase tracking-widest text-xs transition-transform hover:scale-105 active:scale-95 border ${gameState.status === 'countdown' ? 'bg-amber-600 hover:bg-amber-500 border-amber-400/50' : 'bg-indigo-600 hover:bg-indigo-500 border-indigo-400/50'}`}
-              >
-                {gameState.status === 'countdown' ? 'Skip Timer' : 'Start Wave'}
-              </button>
-            )}
           </div>
           <div className="h-8 w-px bg-slate-700 mx-2"></div>
              <div className="flex flex-col">
