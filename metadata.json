@@ -1,0 +1,8 @@
+{
+  "name": "Tower Defense",
+  "description": "A strategy tower defense game built with React. Build defenses, manage your resources, and survive enemy waves.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
