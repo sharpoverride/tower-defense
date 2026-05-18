@@ -49,7 +49,7 @@ export interface LevelInfo {
 }
 
 export interface GameState {
-  status: 'idle' | 'playing' | 'gameover' | 'level_cleared' | 'won' | 'map';
+  status: 'idle' | 'countdown' | 'playing' | 'gameover' | 'level_cleared' | 'won' | 'map';
   money: number;
   lives: number;
   wave: number;
@@ -63,6 +63,7 @@ export interface GameState {
   completedLevels: number[];
   timeSinceLastSpawn: number;
   enemiesToSpawn: EnemyType[];
+  waveCountdown: number;
 }
 
 export const TOWER_STATS: Record<TowerType, { name: string; cost: number; range: number; damage: number; fireRate: number; color: string; description: string }> = {
@@ -87,5 +88,9 @@ export const WAVES: EnemyType[][] = [
   ['fast', 'fast', 'fast', 'fast', 'fast', 'fast', 'fast', 'fast'],
   ['orc', 'orc', 'orc', 'orc', 'orc', 'orc', 'orc', 'orc'],
   ['boss'],
-  ['boss', 'fast', 'fast', 'fast', 'fast', 'orc', 'orc', 'boss']
+  ['boss', 'fast', 'fast', 'fast', 'fast', 'orc', 'orc', 'boss'],
+  ['orc', 'orc', 'fast', 'fast', 'boss', 'goblin', 'goblin', 'fast'],
+  ['fast', 'fast', 'fast', 'fast', 'boss', 'boss', 'fast', 'fast'],
+  ['orc', 'orc', 'orc', 'orc', 'boss', 'boss', 'orc', 'orc'],
+  ['boss', 'boss', 'boss', 'boss', 'boss']
 ];

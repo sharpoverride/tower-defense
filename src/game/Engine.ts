@@ -97,6 +97,7 @@ export function initialGameState(): GameState {
     path: LEVELS_PATHS[0],
     timeSinceLastSpawn: 0,
     enemiesToSpawn: [],
+    waveCountdown: 0,
   };
 }
 
@@ -131,6 +132,7 @@ export class GameEngine {
     this.state.money = 200 + (this.state.completedLevels.length * 50);
     this.state.lives = 20;
     this.state.status = 'idle';
+    this.state.waveCountdown = 0;
   }
 
   returnToMap() {
@@ -145,7 +147,7 @@ export class GameEngine {
   }
 
   startWave() {
-    if (this.state.status === 'idle' || (this.state.enemies.length === 0 && this.state.enemiesToSpawn.length === 0)) {
+    if (this.state.status === 'idle' || this.state.status === 'countdown' || (this.state.enemies.length === 0 && this.state.enemiesToSpawn.length === 0)) {
       if (this.state.wave < WAVES.length) {
         this.state.status = 'playing';
         this.state.enemiesToSpawn = [...WAVES[this.state.wave]];
@@ -223,10 +225,17 @@ export class GameEngine {
   }
 
   update(dt: number) {
-    if (this.state.status !== 'playing') return;
+    if (this.state.status === 'countdown') {
+      this.state.waveCountdown -= dt;
+      if (this.state.waveCountdown <= 0) {
+        this.startWave();
+      }
+    }
+
+    if (this.state.status !== 'playing' && this.state.status !== 'countdown') return;
 
     // 1. Spawning
-    if (this.state.enemiesToSpawn.length > 0) {
+    if (this.state.enemiesToSpawn.length > 0 && this.state.status === 'playing') {
       this.state.timeSinceLastSpawn += dt;
       // Calculate dynamic spawn interval based on enemy speed to keep spacing consistent
       const nextType = this.state.enemiesToSpawn[0];
@@ -253,7 +262,7 @@ export class GameEngine {
           },
         });
       }
-    } else if (this.state.enemies.length === 0) {
+    } else if (this.state.enemies.length === 0 && this.state.status === 'playing') {
       this.state.wave++;
       if (this.state.wave >= WAVES.length) {
         if (this.state.currentLevel < LEVELS_PATHS.length - 1) {
@@ -262,7 +271,8 @@ export class GameEngine {
            this.state.status = 'won';
         }
       } else {
-        this.state.status = 'idle';
+        this.state.status = 'countdown';
+        this.state.waveCountdown = 7.0;
       }
     }
 

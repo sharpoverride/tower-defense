@@ -137,7 +137,10 @@ export default function Game() {
           </button>
           <div className="flex flex-col">
             <span className="text-[10px] uppercase tracking-widest text-slate-500 font-bold">System Status</span>
-            <span className="text-emerald-400 font-mono text-xl">{gameState.status === 'playing' ? 'DEFENSE ACTIVE' : 'IDLE'}</span>
+            <span className={`font-mono text-xl ${gameState.status === 'countdown' ? 'text-amber-400 animate-pulse' : 'text-emerald-400'}`}>
+              {gameState.status === 'playing' ? 'DEFENSE ACTIVE' : 
+               gameState.status === 'countdown' ? `NEXT WAVE: ${Math.ceil(gameState.waveCountdown)}S` : 'IDLE'}
+            </span>
           </div>
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
@@ -159,9 +162,12 @@ export default function Game() {
             <button title="Fast Forward" onClick={() => setSpeed(speed === 1 ? 2 : 1)} className={`p-2 rounded border transition-colors ${speed === 2 ? 'bg-emerald-600/20 border-emerald-500 text-emerald-500' : 'bg-slate-800 border-slate-700 hover:bg-slate-700'}`}>
               <FastForward size={16} />
             </button>
-            {gameState.status === 'idle' && (
-              <button onClick={startWave} className="ml-4 px-6 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded uppercase tracking-widest text-xs transition-transform hover:scale-105 active:scale-95 border border-indigo-400/50">
-                Start Wave
+            {(gameState.status === 'idle' || gameState.status === 'countdown') && (
+              <button 
+                onClick={startWave} 
+                className={`ml-4 px-6 py-2 text-white font-bold rounded uppercase tracking-widest text-xs transition-transform hover:scale-105 active:scale-95 border ${gameState.status === 'countdown' ? 'bg-amber-600 hover:bg-amber-500 border-amber-400/50' : 'bg-indigo-600 hover:bg-indigo-500 border-indigo-400/50'}`}
+              >
+                {gameState.status === 'countdown' ? 'Skip Timer' : 'Start Wave'}
               </button>
             )}
           </div>
