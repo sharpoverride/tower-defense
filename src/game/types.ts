@@ -3,6 +3,8 @@ export type Position = { x: number; y: number };
 export type EnemyType = 'goblin' | 'orc' | 'boss' | 'fast';
 export type TowerType = 'basic' | 'sniper' | 'rapid';
 
+export const MAX_TOWER_LEVEL = 4;
+
 export interface Enemy {
   id: string;
   type: EnemyType;

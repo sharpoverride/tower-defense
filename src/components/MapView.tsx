@@ -11,7 +11,7 @@ interface MapViewProps {
 
 export default function MapView({ gameState, onSelectLevel }: MapViewProps) {
   return (
-    <div className="flex-1 flex flex-col items-center justify-center p-8 bg-[#020617] relative overflow-hidden">
+    <div className="min-h-dvh flex flex-col items-center justify-center px-4 py-6 sm:p-8 bg-[#020617] relative overflow-hidden">
       {/* Background Grid */}
       <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#64748b 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
       <div className="absolute inset-0 opacity-5 pointer-events-none bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:100px_100px]" />
@@ -19,16 +19,16 @@ export default function MapView({ gameState, onSelectLevel }: MapViewProps) {
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="z-10 text-center mb-12"
+        className="z-10 text-center mb-6 sm:mb-12"
       >
-        <h1 className="text-4xl font-black tracking-tightest text-white mb-2 flex items-center justify-center gap-4">
-          <Globe className="text-indigo-500 animate-pulse" size={40} />
+        <h1 className="text-3xl sm:text-4xl font-black text-white mb-3 flex items-center justify-center gap-3 sm:gap-4 leading-tight">
+          <Globe className="text-indigo-500 animate-pulse shrink-0" size={32} />
           GLOBAL DEFENSE COMMAND
         </h1>
-        <p className="text-slate-500 uppercase tracking-widest text-sm font-bold">Select an active sector to initialize defenses</p>
+        <p className="text-slate-500 uppercase tracking-widest text-xs sm:text-sm font-bold leading-relaxed">Select an active sector to initialize defenses</p>
       </motion.div>
 
-      <div className="relative w-full max-w-5xl aspect-[2/1] bg-slate-900/40 border-2 border-slate-800 rounded-3xl shadow-2xl backdrop-blur-sm overflow-hidden">
+      <div className="relative w-full max-w-5xl aspect-[4/3] sm:aspect-[2/1] bg-slate-900/40 border-2 border-slate-800 rounded-2xl sm:rounded-3xl shadow-2xl backdrop-blur-sm overflow-hidden">
         {/* Stylized World Map SVG */}
         <div className="absolute inset-0 opacity-20 pointer-events-none">
           <svg viewBox="0 0 1000 500" className="w-full h-full fill-slate-700">
@@ -114,14 +114,14 @@ export default function MapView({ gameState, onSelectLevel }: MapViewProps) {
                   <div className="absolute w-12 h-12 bg-indigo-500/20 rounded-full animate-ping" />
                 )}
                 
-                <div className={`p-4 rounded-2xl border-2 transition-all shadow-lg ${
+                  <div className={`p-3 sm:p-4 rounded-2xl border-2 transition-all shadow-lg ${
                   isCompleted 
                     ? 'bg-emerald-500/20 border-emerald-500 text-emerald-400' 
                     : isLocked 
                       ? 'bg-slate-800/50 border-slate-700 text-slate-600 grayscale'
                       : 'bg-indigo-500/20 border-indigo-500 text-indigo-400 hover:bg-indigo-500/40'
                 }`}>
-                  {isCompleted ? <CheckCircle2 size={24} /> : isLocked ? <Lock size={24} /> : <MapPin size={24} />}
+                  {isCompleted ? <CheckCircle2 size={22} /> : isLocked ? <Lock size={22} /> : <MapPin size={22} />}
                 </div>
 
                 {/* Level Tag */}
@@ -138,7 +138,7 @@ export default function MapView({ gameState, onSelectLevel }: MapViewProps) {
         })}
       </div>
 
-      <div className="mt-12 flex gap-12 text-slate-500 text-xs font-bold uppercase tracking-widest">
+      <div className="mt-6 sm:mt-12 flex flex-wrap justify-center gap-x-6 gap-y-3 sm:gap-12 text-slate-500 text-[10px] sm:text-xs font-bold uppercase tracking-widest">
          <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-full bg-emerald-500 border border-emerald-400"></div>
             <span>Sector Secured</span>

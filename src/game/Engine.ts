@@ -1,4 +1,4 @@
-import { Enemy, EnemyType, GameState, Position, Projectile, Tower, TowerType, TOWER_STATS, ENEMY_STATS, WAVES, LevelInfo } from './types';
+import { Enemy, EnemyType, GameState, Position, Projectile, Tower, TowerType, TOWER_STATS, ENEMY_STATS, WAVES, LevelInfo, MAX_TOWER_LEVEL } from './types';
 
 // Multiple levels with different paths
 export const LEVELS_PATHS: Position[][] = [
@@ -213,6 +213,7 @@ export class GameEngine {
   upgradeTower(id: string) {
     const tower = this.state.towers.find(t => t.id === id);
     if (!tower) return;
+    if (tower.level >= MAX_TOWER_LEVEL) return;
     const upgradeCost = Math.max(10, Math.floor(TOWER_STATS[tower.type].cost * Math.pow(1.5, tower.level)) - 20);
     if (this.state.money < upgradeCost) return;
 
