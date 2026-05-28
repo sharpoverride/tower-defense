@@ -69,9 +69,9 @@ export interface GameState {
 }
 
 export const TOWER_STATS: Record<TowerType, { name: string; cost: number; range: number; damage: number; fireRate: number; color: string; description: string }> = {
-  basic: { name: 'Basic', cost: 30, range: 3.5, damage: 20, fireRate: 1, color: '#3b82f6', description: 'Balanced starter tower' },
-  sniper: { name: 'Sniper', cost: 100, range: 7, damage: 80, fireRate: 0.4, color: '#ef4444', description: 'High range, high damage, slow fire' },
-  rapid: { name: 'Rapid', cost: 130, range: 2.5, damage: 5, fireRate: 6, color: '#eab308', description: 'Very fast firing rate, short range' },
+  basic: { name: 'Basic', cost: 30, range: 3.5, damage: 24, fireRate: 1, color: '#3b82f6', description: 'Balanced starter tower' },
+  sniper: { name: 'Sniper', cost: 100, range: 7, damage: 96, fireRate: 0.4, color: '#ef4444', description: 'High range, high damage, slow fire' },
+  rapid: { name: 'Rapid', cost: 130, range: 2.5, damage: 6, fireRate: 6, color: '#eab308', description: 'Very fast firing rate, short range' },
 };
 
 export const ENEMY_STATS: Record<EnemyType, { maxHp: number; speed: number; reward: number; damage: number; color: string; radius: number }> = {
